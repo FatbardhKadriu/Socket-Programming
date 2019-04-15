@@ -1,9 +1,9 @@
-from socket import *
+import socket 
 
 serverName = 'localhost'
 port = 12000
 addr = (serverName, port)
-clientSocket = socket(AF_INET, SOCK_STREAM)
+clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 clientSocket.connect(addr)
 
 print("**********************************************************************")
@@ -21,23 +21,20 @@ print("KOHA")
 print("LOJA")
 print("FIBONACCI")
 print("KONVERTIMI{hapësirë}Opsioni{hapësirë}Numër")
-print("Opsionet jane:\n\t\tKilowattToHorsepower\n\t\tHorsepowerToKilowatt\n\t\tDegreesToRadians\n\t\tRadiansToDegrees\n\t\tGallonsToLiters\n")
+print("Opsionet jane:\n\t\tKilowattToHorsepower\n\t\tHorsepowerToKilowatt\n\t\tDegreesToRadians\n\t\tRadiansToDegrees\n\t\tGallonsToLiters\n\t\tLitersToGallons")
 print("\n**********************************************************************")
 print("Shtyp 'shkyqu' apo ENTER nëse dëshironi të shkyçeni nga serveri\n")
 print("**********************************************************************")
 
 
 request = input("Jepni kerkesen tuaj : ")
-i = 1 
+
+i = 1
 while(i == 1):
     clientSocket.send(request.encode())
     data = clientSocket.recv(128).decode()
     print(data)
-    if (request == "SHKYQU"):
-        i = 2 
     request = input("Jepni kerkesen tuaj : ")
-
-
 clientSocket.close()
 
 
