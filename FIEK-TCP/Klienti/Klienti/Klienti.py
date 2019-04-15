@@ -31,8 +31,13 @@ request = input("Jepni kerkesen tuaj : ")
 i = 1 
 while(i == 1):
     clientSocket.send(request.encode())
+    data = clientSocket.recv(128).decode()
+    print(data)
     if (request == "SHKYQU"):
         i = 2 
+    request = input("Jepni kerkesen tuaj : ")
+
+
 clientSocket.close()
 
 
