@@ -42,6 +42,11 @@ def PRINTIMI(text):
 def EMRIIKOMPJUTERIT():
     return socket.gethostname()
 
+def KOHA():
+    from time import gmtime, strftime
+    ActualTime = strftime("%d.%m.%Y %I:%M:%S %p")
+    return ActualTime
+
 def LOJA():
     RandomNumbers = ""
     for x in range(1,8):
@@ -100,6 +105,8 @@ def ThreadFunction(connection):
             data="Teksti i pranuar permban " + str(BASHKETINGELLORE(line)) +" bashketingellore"
         elif((listOfWords[0] == "PRINTIMI") or (listOfWords[0] == "printimi")):
             data="Fjalia qe keni shtypur -> " + str(PRINTIMI(line))
+        elif((listOfWords[0] == "KOHA") or (listOfWords[0] == "koha")):
+            data = "\t" + KOHA()
         elif((listOfWords[0]=="EMRIIKOMPJUTERIT") or (listOfWords[0]=="emriikompjuterit")):
             try:
                 data="Emri i klientit eshte " + EMRIIKOMPJUTERIT()
