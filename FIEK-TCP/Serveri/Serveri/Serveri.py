@@ -80,6 +80,21 @@ def KONVERTIMI(choice, value):
         results = "Gabim!\n\t\tJepni nje nga opsionet e mundshme"
     return results
 
+
+def FAKTORIELI(n):
+    f=1
+    for i in range(1,n+1):
+        f=f*i
+    return f
+
+def SHPERNDARJA(k,n,p):
+    if(p>1):
+        return "Nuk mund te jete probabiliteti me i madh se 1"
+    elif(p<0):
+        return "Probabiliteti nuk mund te jete negativ"
+    else:
+        return (FAKTORIELI(n)/(FAKTORIELI(k)*FAKTORIELI(n-k)))*math.pow(p,k)*math.pow(1-p,n-k)
+
 def ThreadFunction(connection):
    while True:
         try:
@@ -123,7 +138,11 @@ def ThreadFunction(connection):
             except socket.error:
                 break
             data="Vlera e fituar eshte : " + str(KONVERTIMI(listOfWords[1], number))
-
+        elif((listOfWords[0] == "SHPERNDARJA") or listOfWords[0] == "shperndarja"):
+            k = int(listOfWords[1])
+            n = int(listOfWords[2])
+            p = float(listOfWords[3])
+            data = "Shperndarja binomiale : " + str(SHPERNDARJA(k, n, p))
         else:
             data="Serveri nuk mund t'i pergjigjet kesaj kerkese!"
         connection.send(data.encode())
