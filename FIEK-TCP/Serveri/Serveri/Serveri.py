@@ -28,15 +28,15 @@ def IPADRESA():
     return socket.gethostbyname(EMRIIKOMPJUTERIT())
 
 def BASHKETINGELLORE(text):
-    bashketingelloret=['b','B','c','C','Ç','ç','d','D','f','F','g','G','h','H','j','J','k','K','l','L','m','M','n','N','p','P','q','Q','r','R','s','S','t','T','v','V','x','X','z','Z']
-    noOfCons = 0 
-    for character in text:
-        if(character in bashketingelloret):
-            noOfCons = noOfCons + 1
-    return noOfCons
+        bashketingelloret=['b','B','c','C','Ç','ç','d','D','f','F','g','G','h','H','j','J','k','K','l','L','m','M','n','N','p','P','q','Q','r','R','s','S','t','T','v','V','x','X','z','Z']
+        noOfCons = 0
+        for ch in text:
+            if(ch in bashketingelloret):
+                noOfCons = noOfCons + 1
+        return noOfCons
 
 def PRINTIMI(text):
-    text = (str(text)).strip()
+    text=(str(text)).strip()
     return text
 
 def EMRIIKOMPJUTERIT():
@@ -50,12 +50,12 @@ def LOJA():
     return RandomNumbers
 
 def FIBONACCI(no):
-    a = 1 
+    a = 1
     b = 1
     for i in range(2, no):
-        f = a + b
-        a = b
-        b = f 
+        f = a + b;
+        a = b 
+        b = f;
     return f
 
 def KONVERTIMI(choice, value):
@@ -76,48 +76,51 @@ def KONVERTIMI(choice, value):
     return results
 
 def ThreadFunction(connection):
-    while True:
+   while True:
         try:
             data = connection.recv(128).decode()
         except socket.error:
-            print("E dhena nuk eshte pranuar!")
+            print("Të dhënat nuk janë dërguar në server!")
             break
-
-        list = str(data).rsplit(" ")
+        
+        listOfWords = str(data).rsplit(" ")
         line = ""
-        lengthOfList = len(list)
-        for words in range(1, i):
-            line += list[words]
-            if(words != lengthOfList):
-                line = line + " "
+        lengthOfList = len(listOfWords)
+        for words in range(1, lengthOfList):
+            line += listOfWords[words]
+            if(words!=lengthOfList):
+                line += " "
         if not data:
             break
-        elif((list[0] == "IPADRESA") or (list[0] == "ipadresa")):
-            data = "IP Adresa e klientit është "+IPADRESA()
-        elif((list[0] == "BASHKETINGELLORE") or (list[0] == "bashketingellore")):
-            data = "Teksti i pranuar përmban " + str(BASHKETINGELLORE(line))+" bashketingellore"
-        elif((list[0] == "PRINTIMI") or (list[0] == "printimi")):
-            data = "Fjalia që keni shtypur -> " + str(PRINTIMI(line))
-        elif((list[0] == "EMRIIKOMPJUTERIT") or (list[0] == "emriikompjuterit")):
+        elif((listOfWords[0] == "IPADRESA") or (listOfWords[0] == "ipadresa")):
+            data="IP Adresa e klientit eshte : " + IPADRESA()
+        elif((listOfWords[0] == "NUMRIIPORTIT") or (listOfWords[0] == "numriiportit")):
+            data="Klienti eshte duke perdorur portin " + str(address[1])
+        elif((listOfWords[0] == "BASHKETINGELLORE") or (listOfWords[0] == "bashketingellore")):
+            data="Teksti i pranuar permban " + str(BASHKETINGELLORE(line)) +" bashketingellore"
+        elif((listOfWords[0] == "PRINTIMI") or (listOfWords[0] == "printimi")):
+            data="Fjalia qe keni shtypur -> " + str(PRINTIMI(line))
+        elif((listOfWords[0]=="EMRIIKOMPJUTERIT") or (listOfWords[0]=="emriikompjuterit")):
             try:
-                data = "Emri i klientit është " + EMRIIKOMPJUTERIT()
+                data="Emri i klientit eshte " + EMRIIKOMPJUTERIT()
             except socket.error:
-                data = "Emri i klientit nuk mund të gjendet!"
-        elif((list[0] == "LOJA") or (list[0] == "loja")):
-            data = "7 numrat e gjeneruar rastësisht nga [1-49] janë : " + LOJA()
-        elif((list[0] == "FIBONACCI") or (list[0] == "fibonacci")):
+                data="Emri i kompjuterit nuk mund te gjendet!"
+        elif((listOfWords[0] == "LOJA") or (listOfWords[0] == "loja")):
+            data="7 numrat e gjeneruar rastesisht prej [1-49] jane : " + LOJA()
+        elif((listOfWords[0] == "FIBONACCI") or (listOfWords[0] == "fibonacci")):
+                line = int(listOfWords[1])
+                data="FIBONACCI : " + str(FIBONACCI(line))
+        elif((listOfWords[0] == "KONVERTIMI") or (listOfWords[0] == "konvertimi")):
             try:
-                line = int(get[1])
-            except Exception:
+                number = float(listOfWords[2])
+            except socket.error:
                 break
-            data = "FIBONACCI : " + str(FIBONACCI(line))
-        elif((list[0] == "KONVERTIMI") or (list[0] == "konvertimi")):
-            nr = float(list[2])
-            data = "Vlera e fituar është : "+str(KONVERTIMI(list[1],nr))
+            data="Vlera e fituar eshte : " + str(KONVERTIMI(listOfWords[1], number))
+
         else:
-            data = "Serveri nuk ka përgjigje për këtë kërkesë!"
+            data="Serveri nuk mund t'i pergjigjet kesaj kerkese!"
         connection.send(data.encode())
-    connection.close()
+   connection.close()
 
 i = 1 
 while(i == 1):
