@@ -28,9 +28,7 @@ print("**********************************************************************")
 
 
 request = input("Jepni kerkesen tuaj : ")
-
-i = 1
-while(i == 1):
+while((request != 'shkyqu') and (request != 'SHKYQU') and (request != "")):
     clientSocket.send(request.encode())
     data = clientSocket.recv(128).decode()
     print(data)
