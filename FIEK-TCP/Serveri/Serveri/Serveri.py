@@ -2,8 +2,7 @@ import socket
 from _thread import *
 import math 
 import random 
-import os 
-import sys 
+
 
 serverName = 'localhost'
 serverPort = 12000 
@@ -131,7 +130,7 @@ def ThreadFunction(connection):
             data="7 numrat e gjeneruar rastesisht prej [1-49] jane : " + LOJA()
         elif((listOfWords[0] == "FIBONACCI") or (listOfWords[0] == "fibonacci")):
                 line = int(listOfWords[1])
-                data="FIBONACCI : " + str(FIBONACCI(line))
+                data = "FIBONACCI : " + str(FIBONACCI(line))
         elif((listOfWords[0] == "KONVERTIMI") or (listOfWords[0] == "konvertimi")):
             try:
                 number = float(listOfWords[2])
@@ -144,12 +143,12 @@ def ThreadFunction(connection):
             p = float(listOfWords[3])
             data = "Shperndarja binomiale : " + str(SHPERNDARJA(k, n, p))
         else:
-            data="Serveri nuk mund t'i pergjigjet kesaj kerkese!"
+            data = "Serveri nuk mund t'i pergjigjet kesaj kerkese!"
         connection.send(data.encode())
    connection.close()
 
-i = 1 
-while(i == 1):
+
+while True:
     connection, address = serverSocket.accept()
     print("Serveri është lidhur me klientin me IP Adresë %s, në portin %s" % address)
     start_new_thread(ThreadFunction,(connection,))
