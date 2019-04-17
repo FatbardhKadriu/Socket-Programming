@@ -29,11 +29,17 @@ print("**********************************************************************")
 
 
 request = input("Jepni kerkesen tuaj : ")
-while((request != 'shkyqu') and (request != 'SHKYQU') and (request != "")):
-    clientSocket.send(request.encode())
-    data = clientSocket.recv(128).decode()
-    print(data)
-    request = input("Jepni kerkesen tuaj : ")
-clientSocket.close()
+i = 1
+while(i == 1):
+        if((request == 'shkyqu') or (request == 'SHKYQU') or (request == '')):
+            i = 2 
+            clientSocket.close()
+            print("Lidhja klient-server eshte mbyllur")
+        else:
+            clientSocket.send(request.encode())
+            data = clientSocket.recv(128).decode()
+            print(data)
+            request = input("Jepni kerkesen tuaj : ")
+
 
 
