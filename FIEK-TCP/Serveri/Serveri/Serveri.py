@@ -94,6 +94,11 @@ def SHPERNDARJA(k,n,p):
     else:
         return (FAKTORIELI(n)/(FAKTORIELI(k)*FAKTORIELI(n-k)))*math.pow(p,k)*math.pow(1-p,n-k)
 
+def ASCII(s):
+    l1 = [c for c in s]
+    l2 = [ord(c) for c in s]
+    return "\t\t\t" + str(l1) + "\n\t\t\t" + str(l2)
+
 def ThreadFunction(connection):
    while True:
         try:
@@ -102,7 +107,8 @@ def ThreadFunction(connection):
             print("Të dhënat nuk janë dërguar në server!")
             break
         
-        listOfWords = str(data).rsplit(" ")
+        getData = str(data)
+        listOfWords = getData.rsplit(" ")
         line = ""
         lengthOfList = len(listOfWords)
         for words in range(1, lengthOfList):
@@ -142,6 +148,9 @@ def ThreadFunction(connection):
             n = int(listOfWords[2])
             p = float(listOfWords[3])
             data = "Shperndarja binomiale : " + str(SHPERNDARJA(k, n, p))
+        elif((getData[0:6] == ("ascii"+" ")) or (getData[0:6] == ("ASCII"+" "))):
+            l1 = getData[6:]
+            data = "ASCCI List ->\n" + ASCII(l1)
         else:
             data = "Serveri nuk mund t'i pergjigjet kesaj kerkese!"
         connection.send(data.encode())
