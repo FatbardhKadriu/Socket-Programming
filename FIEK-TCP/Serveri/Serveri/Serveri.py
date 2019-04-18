@@ -104,7 +104,7 @@ def ThreadFunction(connection):
         try:
             data = connection.recv(128).decode()
         except socket.error:
-            print("Të dhënat nuk janë dërguar në server!")
+            print("Klienti me IP Adrese " + address[0] + " u shkyq nga serveri yne!")
             break
         
         getData = str(data)
