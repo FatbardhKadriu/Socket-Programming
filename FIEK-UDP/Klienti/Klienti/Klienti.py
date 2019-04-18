@@ -25,7 +25,7 @@ print("Opsionet jane:\n\t\tKilowattToHorsepower\n\t\tHorsepowerToKilowatt\n\t\tD
 print("\n**********************************************************************")
 print("Metodat shtesë:\n")
 print("\tSHPËRNDARJA BINOMIALE{hapësirë}k{hapësirë}n{hapësirë}p")
-print("\tASCII teksti\n")
+print("\tASCII{hapësirë}teksti\n")
 print("Shtyp 'shkyqu' apo ENTER nëse dëshironi të shkyçeni nga serveri\n")
 print("**********************************************************************")
 
