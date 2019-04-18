@@ -25,3 +25,5 @@ Protokolli FIEK permban keto kërkesa(metoda):
 
 Serveri përgjigjet me një mesazh i cili është specifik për secilën kërkesë (metode).
 
+Për shpjegime më të hollësishme shiheni Raportin.
+
