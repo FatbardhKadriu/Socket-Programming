@@ -1,4 +1,4 @@
-import socket 
+﻿import socket 
 
 serverName = 'localhost'
 port = 12000
@@ -34,7 +34,7 @@ while(i == 1):
         if((request == 'shkyqu') or (request == 'SHKYQU') or (request == '')):
             i = 2 
             clientSocket.close()
-            print("Lidhja klient-server eshte mbyllur")
+            print("Lidhja me serverin eshte mbyllur,faleminderit per perdorimin")
         else:
             clientSocket.send(request.encode())
             data = clientSocket.recv(128).decode()
