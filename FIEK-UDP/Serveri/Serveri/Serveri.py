@@ -100,7 +100,7 @@ def ASCII(s):
 
 def ThreadFunction(input, address):
         try:
-            data = data = input.decode() 
+            data  = input.decode() 
         except socket.error:
             print("Të dhënat nuk janë dërguar në server!")
         
@@ -154,7 +154,8 @@ def ThreadFunction(input, address):
 
 while True:
     data, address = serverSocket.recvfrom(128)
-    print("Klienti me IP Adresë %s, i cili po përdor portin %s ka bërë kërkesë" % address)
+    print("Klienti me IP Adresë %s, i cili po përdor portin %s," % address)
+    print("ka bërë kërkesën për ",data)
     start_new_thread(ThreadFunction,(data, address,))
 
 serverSocket.close()
