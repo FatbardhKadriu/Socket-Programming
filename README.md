@@ -18,6 +18,10 @@ Protokolli FIEK permban keto kërkesa(metoda):
 * LOJA
 * KONVERTIMI 
 * FIBONACCI
+#### Dy metodat shtesë
+* SHPËRNDARJA BINOMIALE
+* ASCII
+
 
 Serveri përgjigjet me një mesazh i cili është specifik për secilën kërkesë (metode).
 
