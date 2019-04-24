@@ -2,6 +2,7 @@ import socket
 from _thread import *
 import math 
 import random 
+import sys
 
 
 serverName = 'localhost'
@@ -75,7 +76,7 @@ def KONVERTIMI(choice, value):
     elif(choice == 'LitersToGallons'):
         results = 0.264 * value
     else:
-        results = "Gabim!Jepni nje nga opsionet e mundshme"
+        results = "Gabim!\n\t\tJepni nje nga opsionet e mundshme"
     return results
 
 
@@ -90,13 +91,15 @@ def SHPERNDARJA(k,n,p):
         return "Nuk mund te jete probabiliteti me i madh se 1"
     elif(p<0):
         return "Probabiliteti nuk mund te jete negativ"
+    elif(k>n):
+        return "n duhet te jete me i madh se k"
     else:
         return (FAKTORIELI(n)/(FAKTORIELI(k)*FAKTORIELI(n-k)))*math.pow(p,k)*math.pow(1-p,n-k)
 
 def ASCII(s):
     l1 = [c for c in s]
     l2 = [ord(c) for c in s]
-    return  str(l1) + " " + str(l2)
+    return "\t\t\t" + str(l1) + "\n\t\t\t" + str(l2)
 
 def ThreadFunction(input, address):
         try:
@@ -123,7 +126,7 @@ def ThreadFunction(input, address):
         elif((listOfWords[0] == "PRINTIMI") or (listOfWords[0] == "printimi")):
             data="Fjalia qe keni shtypur -> " + str(PRINTIMI(line))
         elif((listOfWords[0] == "KOHA") or (listOfWords[0] == "koha")):
-            data =  KOHA()
+            data = "\t" + KOHA()
         elif((listOfWords[0]=="EMRIIKOMPJUTERIT") or (listOfWords[0]=="emriikompjuterit")):
             try:
                 data="Emri i klientit eshte " + EMRIIKOMPJUTERIT()
@@ -147,7 +150,7 @@ def ThreadFunction(input, address):
             data = "Shperndarja binomiale : " + str(SHPERNDARJA(k, n, p))
         elif((getData[0:6] == ("ascii"+" ")) or (getData[0:6] == ("ASCII"+" "))):
             l1 = getData[6:]
-            data = "ASCCI List ->" + ASCII(l1)
+            data = "ASCCI List ->\n" + ASCII(l1)
         else:
             data = "Serveri nuk mund t'i pergjigjet kesaj kerkese!"
         serverSocket.sendto(data.encode(), address)
@@ -155,7 +158,7 @@ def ThreadFunction(input, address):
 while True:
     data, address = serverSocket.recvfrom(128)
     print("Klienti me IP Adresë %s, i cili po përdor portin %s," % address)
-    print("ka bërë kërkesën për ",data)
+    print("ka bërë kërkesën",data.decode())
     start_new_thread(ThreadFunction,(data, address,))
 
 serverSocket.close()

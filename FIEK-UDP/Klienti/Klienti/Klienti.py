@@ -39,7 +39,7 @@ while(i == 1):
             print("Lidhja me serverin eshte mbyllur,faleminderit per perdorimin")
         else:
             clientSocket.sendto(request.encode(),addr)
-            data = clientSocket.recv(128)
+            data = clientSocket.recv(128).decode()
             print(data)
             request = input("Jepni kerkesen tuaj : ")
 
