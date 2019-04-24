@@ -2,6 +2,7 @@ import socket
 from _thread import *
 import math 
 import random 
+import sys
 
 
 serverName = 'localhost'
