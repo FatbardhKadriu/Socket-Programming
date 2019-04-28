@@ -92,7 +92,7 @@ def SHPERNDARJA(k,n,p):
         return "Nuk mund te jete probabiliteti me i madh se 1"
     elif(p<0):
         return "Probabiliteti nuk mund te jete negativ"
-     elif(k>n):
+    elif(k>n):
         return "n duhet te jete me i madh se k"
     else:
         return (FAKTORIELI(n)/(FAKTORIELI(k)*FAKTORIELI(n-k)))*math.pow(p,k)*math.pow(1-p,n-k)
