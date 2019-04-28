@@ -157,8 +157,7 @@ def ThreadFunction(input, address):
 
 while True:
     data, address = serverSocket.recvfrom(128)
-    print("Klienti me IP Adresë %s, i cili po përdor portin %s," % address)
-    print("ka bërë kërkesën",data.decode())
+    print(EMRIIKOMPJUTERIT() + " ka bërë kërkesën -> " + data.decode())
     start_new_thread(ThreadFunction,(data, address,))
 
 serverSocket.close()
